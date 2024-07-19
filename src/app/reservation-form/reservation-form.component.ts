@@ -18,6 +18,7 @@ export class ReservationFormComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
+  newReservation = true;
 
   ngOnInit(): void {
     this.reservationForm = this.formBuilder.group({
@@ -29,6 +30,9 @@ export class ReservationFormComponent implements OnInit {
     });
 
     let id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id) {
+      this.newReservation = false;
+    }
     if (id) {
       let reservation = this.reservationService.getReservation(id);
       if (reservation) {
