@@ -34,10 +34,13 @@ export class ReservationFormComponent implements OnInit {
       this.newReservation = false;
     }
     if (id) {
-      let reservation = this.reservationService.getReservation(id);
-      if (reservation) {
-        this.reservationForm.patchValue(reservation);
-      }
+      let reservation = this.reservationService
+        .getReservation(id)
+        .subscribe((reservation) => {
+          if (reservation) {
+            this.reservationForm.patchValue(reservation);
+          }
+        });
     }
   }
 
